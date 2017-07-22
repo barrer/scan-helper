@@ -1,0 +1,6 @@
+### 不进行版本控制的文件及文件夹
+.DS_Store
+.localized
+target/
+*.iml
+.idea
