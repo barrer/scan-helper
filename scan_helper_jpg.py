@@ -155,7 +155,7 @@ def monitor(process_list, count):
         if count.full():
             for process in process_list:
                 process.terminate()
-            print('停止 %s 个进程' % process_list)
+            print('停止 %s 个进程' % len(process_list))
             break
         time.sleep(5)
 
