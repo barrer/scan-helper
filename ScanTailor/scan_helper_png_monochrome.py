@@ -2,7 +2,7 @@
 # version: python 3
 # ==========
 # 作用：
-# imagemagick处理图片（缩放）
+# imagemagick处理图片（处理成黑白）
 # 多进程处理
 # ==========
 # 依赖项：
