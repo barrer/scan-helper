@@ -36,8 +36,8 @@ height = round(paper_height / float(25.4) * dpi)  # 输出高度（像素）
 # 宽度：2480/300*25.4   210mm
 # 高度：3508/300*25.4   297mm
 
-brightness = -20  # 亮度（0表示不设置）
-contrast = 60  # 对比度（0表示不设置）
+brightness = -10  # 亮度（0表示不设置）
+contrast = 20  # 对比度（0表示不设置）
 
 print('width: %s, height: %s' % (width, height))
 print('----------')
