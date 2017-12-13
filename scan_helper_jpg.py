@@ -2,18 +2,15 @@
 # version: python 3
 # ==========
 # 作用：
-# 删除图片exif信息
 # imagemagick处理图片（统一所有图片的宽高分辨率、调整亮度对比度）
 # 多进程处理
 # ==========
 # 依赖项：
 # https://github.com/ImageMagick/ImageMagick/issues/594
 # brew install imagemagick@6
-# pip3 install Pillow
 # ==========
 import sys, os, time
 
-from PIL import Image
 from multiprocessing import Process, Queue
 
 path = '/Users/osx/Desktop/test'  # 处理目录【修改】
@@ -22,9 +19,7 @@ dpi = 300  # DPI【修改】
 paper_width = 210  # 宽度（毫米）【修改】
 paper_height = 297  # 高度（毫米）【修改】
 convert = '/usr/local/opt/imagemagick@6/bin/convert'  # imagemagick路径【修改】
-# 最大进程数（同时处理图片个数，
-#            平均1个python（PIL图片处理包）进程耗费1.5GB内存，
-#            内存耗尽将导致系统卡死）【修改】
+# 最大进程数（同时处理图片个数）【修改】
 max_process = 5
 
 out_path = os.path.join(path, 'out')  # 输出目录
@@ -76,18 +71,8 @@ def get_file_list(file_list_path, file_list_suffix):
 
 def parse_image(in_image_file, out_image_file):
     """
-    删除图片exif信息
-
     imagemagick处理图片
     """
-
-    # -----删除exif信息-----
-    image_file = open(in_image_file, 'rb')
-    image = Image.open(image_file)
-    data = list(image.getdata())
-    image_without_exif = Image.new(image.mode, image.size)
-    image_without_exif.putdata(data)
-    image_without_exif.save(out_image_file)
 
     # -----命令行处理图片-----
     resize = ' -resize %(width)sx%(height)s' % {'width': width, 'height': height}
@@ -111,7 +96,7 @@ def parse_image(in_image_file, out_image_file):
 
     out_image_file_jpg = '%s.jpg' % os.path.splitext(out_image_file)[0]
 
-    in_image = ' "%s"' % out_image_file
+    in_image = ' "%s"' % in_image_file
     out_image = ' "%s"' % out_image_file_jpg
     shell = ('%(convert)s'
              '%(resize)s'
@@ -134,9 +119,6 @@ def parse_image(in_image_file, out_image_file):
 
     # print(shell)
     os.system(shell)
-
-    # 删除去除exif的图片
-    os.remove(out_image_file)
 
 
 def loop(queue, count, id):
