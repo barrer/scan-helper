@@ -26,7 +26,7 @@
 # 操作步骤：
 # 扫描
 # ABBYY歪斜矫正
-# ABBYY另存“JPEG彩色”
+# ABBYY另存“TIFF彩色LZW压缩”
 # “scan_png_monochrome.py”生成“monochrome”目录下黑白png
 # 用无损压缩软件（ImageOptim、limitPNG等）压缩“monochrome”目录下的黑白png（可选操作）
 # 用Adobe Acrobat DC 合并png为单个pdf

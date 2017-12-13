@@ -9,8 +9,7 @@
 # 操作步骤：
 # 扫描（600 DPI）
 # ABBYY歪斜矫正
-# ABBYY另存“JPEG彩色”
-# “scan_helper_rename.py”修改图片名字为数字+英文字符（不能包含空格等特殊符号）
+# ABBYY另存“TIFF彩色LZW压缩”
 # “scan_helper_png.py”生成“monochrome”目录下黑白png
 # 用无损压缩软件（ImageOptim、limitPNG等）压缩“monochrome”目录下的黑白png（可选操作）
 # 用Adobe Acrobat DC 合并png为单个pdf
@@ -26,7 +25,7 @@ from PIL import Image
 from multiprocessing import Process, Queue
 
 path = '/Users/osx/Desktop/test'  # 处理目录【修改】
-suffix = 'jpg'  # "处理目录"中的指定图片后缀【修改】
+suffix = 'tif'  # "处理目录"中的指定图片后缀【修改】
 dpi = 400  # DPI【修改】
 paper_width = 210  # 宽度（毫米）【修改】
 paper_height = 297  # 高度（毫米）【修改】
@@ -50,8 +49,8 @@ height = round(paper_height / float(25.4) * dpi)  # 输出高度（像素）
 # 宽度：2480/300*25.4   210mm
 # 高度：3508/300*25.4   297mm
 
-brightness = -10  # 亮度（0表示不设置）
-contrast = 20  # 对比度（0表示不设置）
+brightness = -20  # 亮度（0表示不设置）
+contrast = 60  # 对比度（0表示不设置）
 
 print('width: %s, height: %s' % (width, height))
 print('----------')
@@ -109,8 +108,8 @@ def parse_image(in_image_file, out_image_file):
 
     out_image_file_png = '%s.png' % os.path.splitext(out_image_file)[0]
 
-    in_image = ' %s' % out_image_file
-    out_image = ' %s' % out_image_file_png
+    in_image = ' "%s"' % out_image_file
+    out_image = ' "%s"' % out_image_file_png
     shell = ('%(convert)s'
              '%(resize)s'
              '%(gravity)s'
@@ -129,7 +128,7 @@ def parse_image(in_image_file, out_image_file):
     # print(shell)
     os.system(shell)
 
-    # 删除去除exif的jpg
+    # 删除去除exif的图片
     os.remove(out_image_file)
 
 

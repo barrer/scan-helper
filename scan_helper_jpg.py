@@ -17,7 +17,7 @@ from PIL import Image
 from multiprocessing import Process, Queue
 
 path = '/Users/osx/Desktop/test'  # 处理目录【修改】
-suffix = 'jpg'  # "处理目录"中的指定图片后缀【修改】
+suffix = 'tif'  # "处理目录"中的指定图片后缀【修改】
 dpi = 300  # DPI【修改】
 paper_width = 210  # 宽度（毫米）【修改】
 paper_height = 297  # 高度（毫米）【修改】
@@ -41,8 +41,8 @@ height = round(paper_height / float(25.4) * dpi)  # 输出高度（像素）
 # 宽度：2480/300*25.4   210mm
 # 高度：3508/300*25.4   297mm
 
-brightness = -10  # 亮度（0表示不设置）
-contrast = 20  # 对比度（0表示不设置）
+brightness = -20  # 亮度（0表示不设置）
+contrast = 60  # 对比度（0表示不设置）
 
 print('width: %s, height: %s' % (width, height))
 print('----------')
@@ -109,8 +109,10 @@ def parse_image(in_image_file, out_image_file):
     if True:  # 禁用二值化
         monochrome = ''
 
-    in_image = ' %s' % out_image_file
-    out_image = ' %s' % out_image_file
+    out_image_file_jpg = '%s.jpg' % os.path.splitext(out_image_file)[0]
+
+    in_image = ' "%s"' % out_image_file
+    out_image = ' "%s"' % out_image_file_jpg
     shell = ('%(convert)s'
              '%(resize)s'
              '%(gravity)s'
@@ -132,6 +134,9 @@ def parse_image(in_image_file, out_image_file):
 
     # print(shell)
     os.system(shell)
+
+    # 删除去除exif的图片
+    os.remove(out_image_file)
 
 
 def loop(queue, count, id):
