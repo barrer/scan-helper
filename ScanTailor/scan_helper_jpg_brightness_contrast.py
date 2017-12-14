@@ -21,8 +21,17 @@ max_process = 20
 
 out_path = os.path.join(path, 'out')  # 输出目录
 
+# 彩色封面处理步骤
+# 1. 调整亮度、对比度：convert -brightness-contrast 0x10 cover.jpg cover1.jpg
+# 2. ScanTailor歪斜校正
+# 3. ScanTailor输出的tif转jpg：convert cover.tif cover.jpg
+# 4. Photoshop压缩（JPEG低）
+# 5. 删除jpg的exif信息
+# 6. "无损"压缩jpg
+
+# 正文最终处理成黑白
 brightness = -10  # 亮度（0表示不设置）
-contrast = 20  # 对比度（0表示不设置）
+contrast = 30  # 对比度（0表示不设置）
 
 # if os.path.exists(out_path):
 #     print('输出目录已存在，请移走后再运行程序！')
