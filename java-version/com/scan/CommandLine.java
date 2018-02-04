@@ -82,9 +82,9 @@ public class CommandLine {
                         // ----- Black & White png
                         if (IS_BLACK_WHITE)
                             commandLine.append(CONVERT).append(" ")
-                                    .append("-resize").append(" ").append(WIDTH * BLACK_WHITE_WIDTH).append(" ")
+                                    .append("-resize").append(" ").append(BLACK_WHITE_WIDTH).append(" ")
                                     .append("-gravity").append(" ").append("center").append(" ")
-                                    .append("-extent").append(" ").append(WIDTH * BLACK_WHITE_WIDTH).append(" ")
+                                    .append("-extent").append(" ").append(BLACK_WHITE_WIDTH).append(" ")
                                     .append("-monochrome").append(" ")
                                     .append(outFile.getAbsolutePath()).append(" ")
                                     .append(getPrefix(outFile.getAbsolutePath())).append(".png").append(" ")
