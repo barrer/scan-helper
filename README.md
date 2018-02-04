@@ -1,10 +1,32 @@
 ## 扫描图片处理脚本
+### java version
+扫描仪、ABBYY等的参数设置可以参考：http://www.cnblogs.com/whycnblogs/category/1036599.html
+```
+1. 扫描图片
+<p>
+2. ABBYY - 编辑图像
+2.1 歪斜校正 - (所有页面) - (歪斜校正)
+2.2 等级 - (输入级别: 69 1.00 223) - (输出级别: 0 255) - (所有页面) - (应用)
+<p>
+3. 文件 - 将页面保存为图像 - (保存类型: jpeg 彩色)
+<p>
+4. 执行 CommandLine 去除exif并统一宽度
+<p>
+5. Adobe Acrobat Pro DC - 创建PDF
+5.1 工具 - 合并文件 - 添加文件 - 选项(文件大小: 默认大小, 其它选项: 取消所有勾选) - 合并
+```
+
+在com目录同一级
+编译
+```javac com/scan/CommandLine.java```
+运行
+```java com.scan.CommandLine```
+### python version
+
 注意：  
 `【修改】`标注的参数根据本机实际情况修改  
 `max_process=进程数` 一定要根据自己机器的内存情况量力而行，**切莫**设置过大导致系统卡死  
 `imagemagick 6.9.9` 请安装此版本，7.x版本有bug已反馈给作者
-
-扫描仪、ABBYY等的参数设置可以参考：http://www.cnblogs.com/whycnblogs/category/1036599.html
 
 脚本列表：
 
