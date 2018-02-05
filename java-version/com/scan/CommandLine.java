@@ -21,13 +21,15 @@ import java.util.concurrent.ThreadPoolExecutor;
  * <p>
  * 5. Adobe Acrobat Pro DC - 创建PDF
  * 5.1 工具 - 合并文件 - 添加文件 - 选项(文件大小: 默认大小, 其它选项: 取消所有勾选) - 合并
+ * <p>
+ * 6. PDF阅读器 - 网格视图 - 检查每页图像
  */
 public class CommandLine {
     private final static String PATH = "/Users/osx/Desktop/ttt/新建文件夹";// 处理目录【修改】
     private final static String SUFFIX = "jpg";// "处理目录"中的指定图片后缀【修改】
     private final static String CONVERT = "/usr/local/opt/imagemagick@6/bin/convert";// imagemagick路径【修改】
     private final static long WIDTH = 2048; // 输出宽度（像素）【修改】
-    private final static int MAX_THREAD = 20;// 最大线程数【修改】
+    private final static int MAX_THREAD = 5;// 最大线程数【修改】
     private final static File OUT_DIR = new File(PATH, "_resize");// 输出目录
     private final static boolean IS_BLACK_WHITE = true;// 是否转成黑白图像【修改】
     private final static int BLACK_WHITE_WIDTH = 3072;// 黑白图像宽度（像素）【修改】
