@@ -3,7 +3,7 @@
 扫描仪、ABBYY等的参数设置可以参考：http://www.cnblogs.com/whycnblogs/category/1036599.html
 ```
 用途：
-识别所有图片（不包含"cover"目录），找出最大"宽、高"，然后应用到所有图片
+识别所有图片（包含"cover"目录），找出最大"宽、高"，然后应用到所有图片
 "PATH"目录中子目录"cover"放封面，不处理为黑白，但与黑白保持相同的宽高（IS_BLACK_WHITE控制正文是否转成黑白：true或false）
 "OUT_DIR"目录为输出目录，包含了彩色封面和黑白正文
 步骤：

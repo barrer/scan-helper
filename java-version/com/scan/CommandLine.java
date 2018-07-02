@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * 用途：
  * <p>
- * 识别所有图片（不包含"cover"目录），找出最大"宽、高"，然后应用到所有图片
+ * 识别所有图片（包含"cover"目录），找出最大"宽、高"，然后应用到所有图片
  * <p>
  * "PATH"目录中子目录"cover"放封面，不处理为黑白，但与黑白保持相同的宽高（IS_BLACK_WHITE控制正文是否转成黑白：true或false）
  * <p>
@@ -63,10 +63,19 @@ public class CommandLine {
     public static void main(String[] args) {
         // 读取文件
         List<File> fileList = getFileWithSuffixDepth1(PATH, SUFFIX);
+        List<File> maxFileList = new ArrayList<>();
+        // 添加主目录
+        maxFileList.addAll(fileList);
+        // 添加cover目录
+        if (new File(BLACK_WHITE_COVER).exists()) {
+            maxFileList.addAll(getFileWithSuffixDepth1(BLACK_WHITE_COVER, SUFFIX));
+        }
+        System.out.println("查找宽高图片总数：" + maxFileList.size());
+
         // 找到最大：宽、高
         int maxWidth = 0;
         int maxHeight = 0;
-        for (final File file : fileList) {
+        for (final File file : maxFileList) {
             try {
                 BufferedImage image = ImageIO.read(file);
                 if (image.getWidth() > maxWidth)
